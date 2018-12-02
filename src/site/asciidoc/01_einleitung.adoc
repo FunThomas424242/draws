@@ -1,0 +1,7 @@
+## Einleitung
+Die vorliegende Arbeit ist dem Gebiet Software-Engineering zugeordnet und befaßt sich mit der computergestützten automatischen Testung von objektorientierter Software.
+
+Ziel der Arbeit auf theoretischer Ebene ist die Entwicklung einer Testmethodide zum zustandsbasierten Test objektorientierter Programme auf der Basis formaler Spezifikationen. Egens zu diesem Zweck, wird ein der vorliegenden Arbeit eine Spezifikationsprache entworfen. In dieser lassen sich Klassen der objektorientierten Programmrsprache Java(TM) als Zustandsautomaten modelieren.
+Diese Automatenfootnoteref:[zustand,Zustandsbildung] bilden die Grundlage für die Ermittlung von Testfallbeschrubungen.footnoteref:[zustand]
+
+
