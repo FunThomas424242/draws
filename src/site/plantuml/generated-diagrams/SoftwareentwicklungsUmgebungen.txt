@@ -1,0 +1,88 @@
+@startuml
+
+cloud DEV {
+
+  node "Linux Server" as linux0 {
+
+    node "Bitbucket" as scm {
+
+    }
+    scm -> jenkinsdev
+  }
+  node "Linux Server" as linux1 {
+
+    node Jenkins as jenkinsdev {
+        queue "Build Pipeline" as buildpipeline
+        queue "PACT Update Pipeline" as pactpipeline
+        queue "Delivery Pipeline"  as deliverypipeline
+        buildpipeline -> dcosdev
+    }
+
+  }
+
+  node "DC/OS Plattform" as dcosdev {
+    folder "Elasticsearch" as elasticdev  <<container>>
+    folder "Cassandra" as cassandradev <<container>>
+    folder "Kafka" as kafkadev <<container>>
+    folder "Oracle" as oracledev <<container>>
+    app1 .. app2
+    folder app1 {
+        folder "master" as app1master{
+            artifact "app1-ui-master" <<container>>
+            artifact "app1-service-master" <<container>>
+        }
+        folder "feature1" as app1feature1{
+            artifact "app1-ui-feature1" <<container>>
+            artifact "app1-service-feature1" <<container>>
+        }
+    }
+    folder app2 {
+        folder "master" as app2master{
+            artifact "app2-ui-master" <<container>>
+            artifact "app2-service-master" <<container>>
+        }
+        folder "feature1" as app2feature1{
+            artifact "app2-ui-feature1" <<container>>
+            artifact "app2-service-feature1" <<container>>
+        }
+    }
+  }
+}
+
+cloud PROD {
+
+
+
+  node Jenkins as jenkinsprod {
+        queue "Deploy Pipeline"  as deploypipelineprod
+  }
+
+  node "DC/OS Plattform" as dcosprod {
+
+      app1prod .. app2prod
+      folder "app1" as app1prod {
+          folder "master" as app1masterprod{
+              artifact "app1-ui-prod" <<container>>
+              artifact "app1-service-prod" <<container>>
+          }
+      }
+      folder "app2" as app2prod {
+          folder "master" as app2masterprod{
+              artifact "app2-ui-prod" <<container>>
+              artifact "app2-service-prod" <<container>>
+          }
+      }
+
+      folder "Elasticsearch" as elasticprod  <<container>>
+      folder "Cassandra" as cassandraprod <<container>>
+      folder "Kafka" as kafkaprod <<container>>
+      folder "Oracle" as oracleprod <<container>>
+
+  }
+
+  deliverypipeline -> deploypipelineprod
+  deploypipelineprod -> dcosprod
+
+}
+
+@enduml
