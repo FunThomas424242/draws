@@ -1,2 +1,4 @@
+image:https://travis-ci.org/FunThomas424242/draws.svg?branch=master["Build Status", link="https://travis-ci.org/FunThomas424242/draws"]
+
 # draws
 Sammlung von Zeichnungen, Diagrammen, Ablaufplänen, Bildschirmmasken
